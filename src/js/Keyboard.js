@@ -7,7 +7,7 @@ import Key from './Key';
 const _base = 440.0; // A4
 
 /**
- * the half steps a note is from A
+ * The amount of half steps a note is from A
  * @type {Array}
  */
 const _steps = {
@@ -51,9 +51,27 @@ const _calculateFrequency = function(steps) {
 export default class  {
     constructor() {
         this.keys = [];
+        this.keyMapping = {};
     }
 
-    registerKey(note, octave) {
+    registerKey(note, octave, keyCode) {
         this.keys.push(new Key(note, octave, _calculateFrequency(_calculateSteps(note, octave))));
+        this.keyMapping[keyCode] = {note: note, octave: octave}
+    }
+
+    keyDown(keyCode, callback) {
+        if (this.keyMapping.hasOwnProperty(keyCode)) {
+            this.keys.forEach(key => {
+                if (key.note === keyMapping[keyCode].note && key.octave === keyMapping[keyCode].octave) {
+                    callback(key.frequency);
+                }
+            });
+        }
+    }
+
+    keyUp(keyCode, callback) {
+        if (this.keyMapping.hasOwnProperty(keyCode)) (
+            callback();
+        )
     }
 };
