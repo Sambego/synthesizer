@@ -11,7 +11,7 @@ export default class VCO {
         this.oscillator = audioContext.createOscillator();
         this.oscillator.frequency.value = 1;
         this.oscillator.type = type;
-        this.oscillator.start();
+        this.oscillator.start(0);
 
         this.gain = audioContext.createGain();
         this.gain.gain.value = this._amp;

@@ -123,6 +123,10 @@
 	    document.querySelector('[data-controll="lfo.amp"]').addEventListener('input', function (event) {
 	        synth.lfo.amp = event.target.value;
 	    });
+
+	    document.querySelector('[data-controll="vca.gain"]').addEventListener('input', function (event) {
+	        synth.gain.gain.value = parseFloat(event.target.value);
+	    });
 	})();
 
 /***/ },
@@ -248,11 +252,14 @@
 	        this.vco1 = new _VCO2.default(this.audioContext);
 	        this.vco2 = new _VCO2.default(this.audioContext);
 	        this.lfo = new _LFO2.default(this.audioContext);
+	        this.gain = this.audioContext.createGain();
+	        this.gain.gain.value = 1;
 
 	        this.lfo.connect(this.vco1.oscillator.frequency);
 	        this.lfo.connect(this.vco2.oscillator.frequency);
-	        this.vco1.connect(this.audioContext.destination);
-	        this.vco2.connect(this.audioContext.destination);
+	        this.vco1.connect(this.gain);
+	        this.vco2.connect(this.gain);
+	        this.gain.connect(this.audioContext.destination);
 	    }
 
 	    _createClass(Synth, [{
@@ -310,7 +317,7 @@
 	        this.oscillator = audioContext.createOscillator();
 	        this.oscillator.frequency.value = 1;
 	        this.oscillator.type = type;
-	        this.oscillator.start();
+	        this.oscillator.start(0);
 
 	        this.gain = audioContext.createGain();
 	        this.gain.gain.value = this._amp;

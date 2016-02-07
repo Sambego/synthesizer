@@ -68,4 +68,8 @@ import Synth from './Synth';
     document.querySelector('[data-controll="lfo.amp"]').addEventListener('input', event => {
         synth.lfo.amp = event.target.value;
     });
+
+    document.querySelector('[data-controll="vca.gain"]').addEventListener('input', event => {
+        synth.gain.gain.value = parseFloat(event.target.value);
+    });
 })();

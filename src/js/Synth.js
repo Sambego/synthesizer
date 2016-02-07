@@ -8,11 +8,14 @@ export default class Synth {
         this.vco1 = new VCO(this.audioContext);
         this.vco2 = new VCO(this.audioContext);
         this.lfo = new LFO(this.audioContext);
+        this.gain = this.audioContext.createGain();
+        this.gain.gain.value = 1;
 
         this.lfo.connect(this.vco1.oscillator.frequency);
         this.lfo.connect(this.vco2.oscillator.frequency);
-        this.vco1.connect(this.audioContext.destination);
-        this.vco2.connect(this.audioContext.destination);
+        this.vco1.connect(this.gain);
+        this.vco2.connect(this.gain);
+        this.gain.connect(this.audioContext.destination)
     }
 
     play(note, octave) {
