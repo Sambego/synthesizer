@@ -1,0 +1,158 @@
+/**
+ * Variables
+ */
+$wood: #C57432;
+$key-shadow: #dcdcdc;
+
+$grey--dark: #222;
+$grey: #333949;
+$grey--light: #f2f2f2;
+
+$keys: 18;
+
+/**
+ * Set box-sizing to border-box
+ */
+* {
+    box-sizing: border-box;
+}
+
+/**
+ * Set the perspective of the body
+ */
+body {
+    perspective: 70rem;
+    perspective-origin: 45rem 0;
+
+    font-family: Helvetica, arial, sans-serif;
+}
+
+/**
+ * The synthesize part
+ */
+.synth {
+  position: relative;
+
+  width: 70rem;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
+}
+
+/**
+ * The wooden edges of the synth
+ */
+.edge--left,
+.edge--right {
+  position: absolute;
+  top: -0.1rem;
+  bottom: -0.1rem;
+  left: 0;
+
+  width: 2rem;
+
+  background: $wood;
+
+  border-radius: 4px;
+}
+
+.edge--right {
+  left: auto;
+  right: 0;
+}
+
+/**
+ * The synthsizer controll-panel
+ */
+.synth__control-panel {
+  height: 20rem;
+
+  background: $grey;
+}
+
+/**
+ * The keyboard
+ */
+.keyboard {
+    transform: rotateX(30deg);
+
+    position: relative;
+
+    width: 72.5rem;
+    margin: 0rem auto 2rem;
+    padding: 0 2rem;
+}
+
+.keyboard__key-holder {
+    height: 10rem;
+
+    background: $grey;
+}
+
+.keyboard__key {
+    position: relative;
+
+    float: left;
+    width: percentage(1 / $keys);
+    height: 100%;
+
+    background: #fff;
+
+    border: 1px solid $key-shadow;
+
+    &.keyboard__key--active {
+        background: $grey--light;
+    }
+}
+
+.keyboard__key--keyboard::before {
+    content: attr(data-keyboard-key);
+
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+
+    width: 1rem;
+    height: .4rem;
+    margin-left: -0.5rem;
+    padding: .2rem 0 0.3rem;
+
+    background: rgba(#000, .2);
+
+    border-radius: 4px;
+
+    font-size: .6rem;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.keyboard__key-holder--black {
+    position: absolute;
+    top: 0;
+    bottom: 30%;
+    left: 0;
+    right: 0;
+
+    padding: 0 2rem;
+}
+
+.keyboard__key--black {
+    float: left;
+    width: percentage(1 / ($keys * 2));
+    height: 100%;
+    margin-left: percentage(1 / ($keys * 2));
+
+    background: #000;
+
+    &.keyboard__key--active {
+        background: $grey--dark;
+    }
+
+    &.keyboard__key--keyboard::before {
+        background: rgba(#fff, .2);
+    }
+}
+
+.keyboard__key--black--offset {
+    margin-left: percentage(1 / ($keys)) + percentage(1 / ($keys * 2)); //9.3
+}
