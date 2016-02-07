@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Phatty</title>
+        <title>Synth</title>
         <!-- <link rel="stylesheet" type="text/css" href="dist/style.css"> -->
     </head>
 
@@ -8,7 +8,47 @@
         <div class="synth">
             <div class="edge--left"></div>
             <div class="synth__control-panel">
-                Controlls
+                <fieldset>
+                    <legend>VCO 1</legend>
+
+                    <label>
+                        Detune
+                        <input type="range" min="0" max="96" value="0" step="1" data-controll="vco1.detune">
+                    </label>
+
+                    <label>
+                        Amp
+                        <input type="range" min="0" max="1" value="1" step="0.01" data-controll="vco1.amp">
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>VCO 2</legend>
+
+                    <label>
+                        Detune
+                        <input type="range" min="0" max="96" value="0" step="1" data-controll="vco2.detune">
+                    </label>
+
+                    <label>
+                        Amp
+                        <input type="range" min="0" max="1" value="1" step="0.01" data-controll="vco2.amp">
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>LFO</legend>
+
+                    <label>
+                        Rate
+                        <input type="range" min="0" max="20" value="0" step="0.1" data-controll="lfo.rate">
+                    </label>
+
+                    <label>
+                        Amp
+                        <input type="range" min="0" max="100" value="0" step="1" data-controll="lfo.amp">
+                    </label>
+                </fieldset>
             </div>
             <div class="edge--right"></div>
         </div>
@@ -16,40 +56,40 @@
             <div class="edge--left"></div>
 
             <div class="keyboard__key-holder">
-                <div class="keyboard__key keyboard__key--keyboard" data-note="C" data-octave="2" data-keyboard-key="A" data-keyboard-code="65"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="D" data-octave="2" data-keyboard-key="S" data-keyboard-code="83"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="E" data-octave="2" data-keyboard-key="D" data-keyboard-code="68"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="F" data-octave="2" data-keyboard-key="F" data-keyboard-code="70"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="G" data-octave="2" data-keyboard-key="G" data-keyboard-code="71"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="A" data-octave="2" data-keyboard-key="H" data-keyboard-code="72"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="B" data-octave="2" data-keyboard-key="J" data-keyboard-code="74"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="C" data-octave="3" data-keyboard-key="K" data-keyboard-code="75"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="D" data-octave="3" data-keyboard-key="L" data-keyboard-code="76"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="E" data-octave="3" data-keyboard-key=";" data-keyboard-code="186"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="F" data-octave="3" data-keyboard-key="'" data-keyboard-code="222"></div>
-                <div class="keyboard__key keyboard__key--keyboard" data-note="G" data-octave="3" data-keyboard-key="\" data-keyboard-code="220"></div>
-                <div class="keyboard__key" data-note="A" data-octave="3"></div>
-                <div class="keyboard__key" data-note="B" data-octave="3"></div>
-                <div class="keyboard__key" data-note="C" data-octave="4"></div>
-                <div class="keyboard__key" data-note="D" data-octave="4"></div>
-                <div class="keyboard__key" data-note="E" data-octave="4"></div>
-                <div class="keyboard__key" data-note="F" data-octave="4"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="C" data-octave="0" data-keyboard-key="A" data-keyboard-code="65"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="D" data-octave="0" data-keyboard-key="S" data-keyboard-code="83"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="E" data-octave="0" data-keyboard-key="D" data-keyboard-code="68"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="F" data-octave="0" data-keyboard-key="F" data-keyboard-code="70"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="G" data-octave="0" data-keyboard-key="G" data-keyboard-code="71"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="A" data-octave="0" data-keyboard-key="H" data-keyboard-code="72"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="B" data-octave="0" data-keyboard-key="J" data-keyboard-code="74"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="C" data-octave="1" data-keyboard-key="K" data-keyboard-code="75"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="D" data-octave="1" data-keyboard-key="L" data-keyboard-code="76"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="E" data-octave="1" data-keyboard-key=";" data-keyboard-code="186"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="F" data-octave="1" data-keyboard-key="'" data-keyboard-code="222"></div>
+                <div class="keyboard__key keyboard__key--keyboard" data-note="G" data-octave="1" data-keyboard-key="\" data-keyboard-code="220"></div>
+                <div class="keyboard__key" data-note="A" data-octave="1"></div>
+                <div class="keyboard__key" data-note="B" data-octave="1"></div>
+                <div class="keyboard__key" data-note="C" data-octave="2"></div>
+                <div class="keyboard__key" data-note="D" data-octave="2"></div>
+                <div class="keyboard__key" data-note="E" data-octave="2"></div>
+                <div class="keyboard__key" data-note="F" data-octave="2"></div>
             </div>
 
             <div class="keyboard__key-holder--black">
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Csharp" data-octave="2" data-keyboard-key="W" data-keyboard-code="87"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Dsharp" data-octave="2" data-keyboard-key="E" data-keyboard-code="69"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Fsharp" data-octave="2" data-keyboard-key="T" data-keyboard-code="84"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Gsharp" data-octave="2" data-keyboard-key="Y" data-keyboard-code="89"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Asharp" data-octave="2" data-keyboard-key="U" data-keyboard-code="85"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Csharp" data-octave="3" data-keyboard-key="O" data-keyboard-code="79"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Dsharp" data-octave="3" data-keyboard-key="P" data-keyboard-code="80"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Fsharp" data-octave="3" data-keyboard-key="]" data-keyboard-code="221"></div>
-                <div class="keyboard__key keyboard__key--black" data-note="Gsharp" data-octave="3"></div>
-                <div class="keyboard__key keyboard__key--black" data-note="Asharp" data-octave="3"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--black--offset" data-note="Csharp" data-octave="4"></div>
-                <div class="keyboard__key keyboard__key--black" data-note="Dsharp" data-octave="4"></div>
-                <div class="keyboard__key keyboard__key--black keyboard__key--black--offset" data-note="Fsharp" data-octave="4"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Csharp" data-octave="0" data-keyboard-key="W" data-keyboard-code="87"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Dsharp" data-octave="0" data-keyboard-key="E" data-keyboard-code="69"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Fsharp" data-octave="0" data-keyboard-key="T" data-keyboard-code="84"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Gsharp" data-octave="0" data-keyboard-key="Y" data-keyboard-code="89"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Asharp" data-octave="0" data-keyboard-key="U" data-keyboard-code="85"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Csharp" data-octave="1" data-keyboard-key="O" data-keyboard-code="79"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard" data-note="Dsharp" data-octave="1" data-keyboard-key="P" data-keyboard-code="80"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--keyboard keyboard__key--black--offset" data-note="Fsharp" data-octave="1" data-keyboard-key="]" data-keyboard-code="221"></div>
+                <div class="keyboard__key keyboard__key--black" data-note="Gsharp" data-octave="1"></div>
+                <div class="keyboard__key keyboard__key--black" data-note="Asharp" data-octave="1"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--black--offset" data-note="Csharp" data-octave="2"></div>
+                <div class="keyboard__key keyboard__key--black" data-note="Dsharp" data-octave="2"></div>
+                <div class="keyboard__key keyboard__key--black keyboard__key--black--offset" data-note="Fsharp" data-octave="2"></div>
             </div>
 
             <div class="edge--right"></div>

@@ -1,26 +1,27 @@
+import VCO from './VCO';
+import LFO from './LFO';
+
 export default class Synth {
     constructor() {
         this.audioContext = new AudioContext;
 
-        this.oscillator1 = this.audioContext.createOscillator();
-        this.oscillator1.frequency.value = 1;
-        this.oscillator1.type = 'sawtooth';
-        this.oscillator1.start();
+        this.vco1 = new VCO(this.audioContext);
+        this.vco2 = new VCO(this.audioContext);
+        this.lfo = new LFO(this.audioContext);
 
-        this.gain = this.audioContext.createGain();
-        this.gain.gain.value = 0;
-
-        this.oscillator1.connect(this.gain);
-        this.gain.connect(this.audioContext.destination);
+        this.lfo.connect(this.vco1.oscillator.frequency);
+        this.lfo.connect(this.vco2.oscillator.frequency);
+        this.vco1.connect(this.audioContext.destination);
+        this.vco2.connect(this.audioContext.destination);
     }
 
-    play(frequency) {
-        this.oscillator1.frequency.value = frequency;
-
-        this.gain.gain.value = 1;
+    play(note, octave) {
+        this.vco1.play(note, octave);
+        this.vco2.play(note, octave);
     }
 
     stop() {
-        this.gain.gain.value = 0;
+        this.vco1.stop();
+        this.vco2.stop();
     }
 };
