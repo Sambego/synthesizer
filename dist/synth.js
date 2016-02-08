@@ -339,7 +339,11 @@
 	    _createClass(VCO, [{
 	        key: 'calculateFrequency',
 	        value: function calculateFrequency() {
-	            return _FrequencyCalculator2.default.calculateFrequencyByStep(_FrequencyCalculator2.default.calculateSteps(this._note, this._octave) + this._detune + this._octaveUp * 12);
+	            var _steps = _FrequencyCalculator2.default.calculateSteps(this._note, this._octave);
+	            _steps += this._detune;
+	            _steps += this._octaveUp * 12;
+
+	            return _FrequencyCalculator2.default.calculateFrequencyByStep(_steps);
 	        }
 	    }, {
 	        key: 'connect',
@@ -444,11 +448,11 @@
 	 * The base frequency, we'll use A4 since this is a nice whole number
 	 * @type {Number}
 	 */
-	var _base = 440.0; // A4
+	var _base = 440.0; // An A-note in the fourth octave
 
 	/**
 	 * The amount of half steps a note is from A
-	 * @type {Array}
+	 * @type {Object}
 	 */
 	var _steps = {
 	  C: -9,
@@ -474,7 +478,7 @@
 	    key: "calculateSteps",
 
 	    /**
-	     * Calculate the amount of half steps between A4 and a given note anc octave
+	     * Calculate the amount of half steps between A4 and a given note and octave
 	     * @param  {String} note   [The note]
 	     * @param  {Number} octave [The octave]
 	     * @return {Number}        [The number of half steps]
@@ -485,7 +489,8 @@
 
 	    /**
 	     * Calculate the frequency of a note based on the amount of half steps
-	     * above or below the base note (A4)
+	     * above or below the base note (A4).
+	     * This can be a positive number (above) or a negative number (below).
 	     * @param  {Number} steps [The number of half steps]
 	     * @return {Number}       [The calculated frequency]
 	     */
@@ -498,9 +503,9 @@
 
 	    /**
 	     * Calculate the frequency of a note based on the note and octave
-	     * @param  {String} note   [description]
-	     * @param  {Number} octave [description]
-	     * @return {Number}        [description]
+	     * @param  {String} note   [The note]
+	     * @param  {Number} octave [The octave]
+	     * @return {Number}        [The frequency of the note]
 	     */
 
 	  }, {

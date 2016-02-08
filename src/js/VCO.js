@@ -24,7 +24,11 @@ export default class VCO {
     }
 
     calculateFrequency() {
-        return FrequencyCalculator.calculateFrequencyByStep(FrequencyCalculator.calculateSteps(this._note, this._octave) + this._detune + (this._octaveUp * 12));
+        let _steps = FrequencyCalculator.calculateSteps(this._note, this._octave);
+            _steps += this._detune;
+            _steps += (this._octaveUp * 12);
+            
+        return FrequencyCalculator.calculateFrequencyByStep(_steps);
     }
 
     connect(input) {
