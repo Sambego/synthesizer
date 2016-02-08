@@ -477,9 +477,9 @@
 
 	        /**
 	         * Calculate the frequency of a note based on the note and octave
-	         * @param  {[type]} note   [description]
-	         * @param  {[type]} octave [description]
-	         * @return {[type]}        [description]
+	         * @param  {String} note   [description]
+	         * @param  {Number} octave [description]
+	         * @return {Number}        [description]
 	         */
 
 	    }, {

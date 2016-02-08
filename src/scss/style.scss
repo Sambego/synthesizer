@@ -154,5 +154,5 @@ body {
 }
 
 .keyboard__key--black--offset {
-    margin-left: percentage(1 / ($keys)) + percentage(1 / ($keys * 2)); //9.3
+    margin-left: percentage(1 / ($keys)) + percentage(1 / ($keys * 2));
 }
