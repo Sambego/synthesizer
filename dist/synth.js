@@ -167,7 +167,7 @@
 	    _createClass(_class, [{
 	        key: 'registerKey',
 	        value: function registerKey(note, octave, keyCode) {
-	            this.keyMapping[keyCode] = { note: note, octave: octave };
+	            this.keyMapping[keyCode] = new _Key2.default(note, octave);
 	        }
 	    }, {
 	        key: 'keyDown',
@@ -206,12 +206,11 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Key = function () {
-	    function Key(note, octave, frequency) {
+	    function Key(note, octave) {
 	        _classCallCheck(this, Key);
 
 	        this.note = note;
 	        this.octave = octave;
-	        this.frequency = frequency;
 	    }
 
 	    _createClass(Key, [{

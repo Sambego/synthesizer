@@ -6,7 +6,7 @@ export default class  {
     }
 
     registerKey(note, octave, keyCode) {
-        this.keyMapping[keyCode] = {note: note, octave: octave}
+        this.keyMapping[keyCode] = new Key(note, octave);
     }
 
     keyDown(keyCode, callback) {
