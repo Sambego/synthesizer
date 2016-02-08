@@ -49,12 +49,20 @@ import Synth from './Synth';
         synth.vco1.detune = event.target.value;
     });
 
+    document.querySelector('[data-controll="vco1.octaveUp"]').addEventListener('input', event => {
+        synth.vco1.octaveUp = event.target.value;
+    });
+
     document.querySelector('[data-controll="vco1.amp"]').addEventListener('input', event => {
         synth.vco1.amp = event.target.value;
     });
 
     document.querySelector('[data-controll="vco2.detune"]').addEventListener('input', event => {
         synth.vco2.detune = event.target.value;
+    });
+
+    document.querySelector('[data-controll="vco2.octaveUp"]').addEventListener('input', event => {
+        synth.vco2.octaveUp = event.target.value;
     });
 
     document.querySelector('[data-controll="vco2.amp"]').addEventListener('input', event => {

@@ -104,12 +104,20 @@
 	        synth.vco1.detune = event.target.value;
 	    });
 
+	    document.querySelector('[data-controll="vco1.octaveUp"]').addEventListener('input', function (event) {
+	        synth.vco1.octaveUp = event.target.value;
+	    });
+
 	    document.querySelector('[data-controll="vco1.amp"]').addEventListener('input', function (event) {
 	        synth.vco1.amp = event.target.value;
 	    });
 
 	    document.querySelector('[data-controll="vco2.detune"]').addEventListener('input', function (event) {
 	        synth.vco2.detune = event.target.value;
+	    });
+
+	    document.querySelector('[data-controll="vco2.octaveUp"]').addEventListener('input', function (event) {
+	        synth.vco2.octaveUp = event.target.value;
 	    });
 
 	    document.querySelector('[data-controll="vco2.amp"]').addEventListener('input', function (event) {
@@ -312,7 +320,8 @@
 	        this._frequency = 0;
 	        this._amp = 1;
 	        this._note = 'C';
-	        this._octave = '0';
+	        this._octave = 0;
+	        this._octaveUp = 2;
 
 	        this.oscillator = audioContext.createOscillator();
 	        this.oscillator.frequency.value = 1;
@@ -329,6 +338,11 @@
 	    }
 
 	    _createClass(VCO, [{
+	        key: 'calculateFrequency',
+	        value: function calculateFrequency() {
+	            return _FrequencyCalculator2.default.calculateFrequencyByStep(_FrequencyCalculator2.default.calculateSteps(this._note, this._octave) + this._detune + this._octaveUp * 12);
+	        }
+	    }, {
 	        key: 'connect',
 	        value: function connect(input) {
 	            return this.output.connect(input);
@@ -337,11 +351,11 @@
 	        key: 'play',
 	        value: function play() {
 	            var note = arguments.length <= 0 || arguments[0] === undefined ? 'C' : arguments[0];
-	            var octave = arguments.length <= 1 || arguments[1] === undefined ? '0' : arguments[1];
+	            var octave = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
 
 	            this._note = note;
-	            this._octave = octave;
-	            this.frequency = _FrequencyCalculator2.default.calculateFrequencyByStep(_FrequencyCalculator2.default.calculateSteps(note, octave) + this._detune);
+	            this._octave = parseInt(octave);
+	            this._frequency = this.calculateFrequency();
 	            this.oscillator.frequency.value = this.frequency;
 
 	            this.gain.gain.value = this._amp;
@@ -377,7 +391,7 @@
 	        },
 	        set: function set(detune) {
 	            this._detune = parseInt(detune);
-	            this._frequency = _FrequencyCalculator2.default.calculateFrequencyByStep(_FrequencyCalculator2.default.calculateSteps(this._note, this._octave) + this._detune);
+	            this._frequency = this.calculateFrequency();
 	            this.oscillator.frequency.value = this._frequency;
 
 	            return this._detune;
@@ -392,6 +406,18 @@
 	            this.gain.gain.value = this._amp;
 
 	            return this._amp;
+	        }
+	    }, {
+	        key: 'octaveUp',
+	        get: function get() {
+	            return this._octave;
+	        },
+	        set: function set(octave) {
+	            this._octaveUp = parseInt(octave);
+	            this.frequency = this.calculateFrequency();
+	            this.oscillator.frequency.value = this._frequency;
+
+	            return this._octaveUp;
 	        }
 	    }]);
 
@@ -410,7 +436,7 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -426,70 +452,66 @@
 	 * @type {Array}
 	 */
 	var _steps = {
-	    C: -9,
-	    Csharp: -8,
-	    D: -7,
-	    Dsharp: -6,
-	    E: -5,
-	    F: -4,
-	    Fsharp: -3,
-	    G: -2,
-	    Gsharp: -1,
-	    A: 0,
-	    Asharp: 1,
-	    B: 2
+	  C: -9,
+	  Csharp: -8,
+	  D: -7,
+	  Dsharp: -6,
+	  E: -5,
+	  F: -4,
+	  Fsharp: -3,
+	  G: -2,
+	  Gsharp: -1,
+	  A: 0,
+	  Asharp: 1,
+	  B: 2
 	};
 
 	var FrequencyCalculator = function () {
-	    function FrequencyCalculator() {
-	        _classCallCheck(this, FrequencyCalculator);
+	  function FrequencyCalculator() {
+	    _classCallCheck(this, FrequencyCalculator);
+	  }
+
+	  _createClass(FrequencyCalculator, null, [{
+	    key: "calculateSteps",
+
+	    /**
+	     * Calculate the amount of half steps between A4 and a given note anc octave
+	     * @param  {String} note   [The note]
+	     * @param  {Number} octave [The octave]
+	     * @return {Number}        [The number of half steps]
+	     */
+	    value: function calculateSteps(note, octave) {
+	      return (4 - octave) * -12 + _steps[note];
 	    }
 
-	    _createClass(FrequencyCalculator, null, [{
-	        key: "calculateSteps",
+	    /**
+	     * Calculate the frequency of a note based on the amount of half steps
+	     * above or below the base note (A4)
+	     * @param  {Number} steps [The number of half steps]
+	     * @return {Number}       [The calculated frequency]
+	     */
 
-	        /**
-	         * Calculate the amount of half steps between A4 and a given note anc octave
-	         * @param  {String} note   [The note]
-	         * @param  {Number} octave [The octave]
-	         * @return {Number}        [The number of half steps]
-	         */
-	        value: function calculateSteps(note, octave) {
-	            if (octave === 4) {
-	                return _steps[note];
-	            } else {
-	                return (4 - octave) * -12 + _steps[note];
-	            }
-	        }
+	  }, {
+	    key: "calculateFrequencyByStep",
+	    value: function calculateFrequencyByStep(steps) {
+	      return _base * Math.pow(Math.pow(2, 1 / 12), steps);
+	    }
 
-	        /**
-	         * Calculate the frequency of a note based on the amount of half steps
-	         * above or below the base note (A4)
-	         * @param  {Number} steps [The number of half steps]
-	         * @return {Number}       [The calculated frequency]
-	         */
+	    /**
+	     * Calculate the frequency of a note based on the note and octave
+	     * @param  {String} note   [description]
+	     * @param  {Number} octave [description]
+	     * @return {Number}        [description]
+	     */
 
-	    }, {
-	        key: "calculateFrequencyByStep",
-	        value: function calculateFrequencyByStep(steps) {
-	            return _base * Math.pow(Math.pow(2, 1 / 12), steps);
-	        }
+	  }, {
+	    key: "calculateFrequencyByNote",
+	    value: function calculateFrequencyByNote(note, octave) {
+	      return this.calculateFrequencyByStep(this.calculateSteps(note, octave));
+	    }
+	  }]);
 
-	        /**
-	         * Calculate the frequency of a note based on the note and octave
-	         * @param  {String} note   [description]
-	         * @param  {Number} octave [description]
-	         * @return {Number}        [description]
-	         */
-
-	    }, {
-	        key: "calculateFrequencyByNote",
-	        value: function calculateFrequencyByNote(note, octave) {
-	            return this.calculateFrequencyByStep(this.calculateSteps(note, octave));
-	        }
-	    }]);
-
-	    return FrequencyCalculator;
+	  return FrequencyCalculator;
 	}();
 
 	exports.default = FrequencyCalculator;

@@ -6,7 +6,8 @@ export default class VCO {
         this._frequency = 0;
         this._amp = 1;
         this._note = 'C';
-        this._octave = '0';
+        this._octave = 0;
+        this._octaveUp = 2;
 
         this.oscillator = audioContext.createOscillator();
         this.oscillator.frequency.value = 1;
@@ -22,14 +23,18 @@ export default class VCO {
         this.oscillator.connect(this.gain);
     }
 
+    calculateFrequency() {
+        return FrequencyCalculator.calculateFrequencyByStep(FrequencyCalculator.calculateSteps(this._note, this._octave) + this._detune + (this._octaveUp * 12));
+    }
+
     connect(input) {
         return this.output.connect(input);
     }
 
-    play(note = 'C', octave = '0') {
+    play(note = 'C', octave = 0) {
         this._note = note;
-        this._octave = octave;
-        this.frequency = FrequencyCalculator.calculateFrequencyByStep(FrequencyCalculator.calculateSteps(note, octave) + this._detune);
+        this._octave = parseInt(octave);
+        this._frequency = this.calculateFrequency();
         this.oscillator.frequency.value = this.frequency;
 
         this.gain.gain.value = this._amp;
@@ -63,7 +68,7 @@ export default class VCO {
 
     set detune(detune) {
         this._detune = parseInt(detune);
-        this._frequency = FrequencyCalculator.calculateFrequencyByStep(FrequencyCalculator.calculateSteps(this._note, this._octave) + this._detune);
+        this._frequency = this.calculateFrequency();
         this.oscillator.frequency.value = this._frequency;
 
         return this._detune;
@@ -80,4 +85,15 @@ export default class VCO {
         return this._amp;
     }
 
+    get octaveUp() {
+        return this._octave;
+    }
+
+    set octaveUp(octave) {
+        this._octaveUp = parseInt(octave);
+        this.frequency = this.calculateFrequency();
+        this.oscillator.frequency.value = this._frequency;
+
+        return this._octaveUp;
+    }
 };
