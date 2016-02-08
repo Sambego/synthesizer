@@ -27,7 +27,7 @@ export default class VCO {
         let _steps = FrequencyCalculator.calculateSteps(this._note, this._octave);
             _steps += this._detune;
             _steps += (this._octaveUp * 12);
-            
+
         return FrequencyCalculator.calculateFrequencyByStep(_steps);
     }
 
@@ -90,7 +90,7 @@ export default class VCO {
     }
 
     get octaveUp() {
-        return this._octave;
+        return this._octaveUp;
     }
 
     set octaveUp(octave) {

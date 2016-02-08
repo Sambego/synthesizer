@@ -413,7 +413,7 @@
 	    }, {
 	        key: 'octaveUp',
 	        get: function get() {
-	            return this._octave;
+	            return this._octaveUp;
 	        },
 	        set: function set(octave) {
 	            this._octaveUp = parseInt(octave);
