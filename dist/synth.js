@@ -42,9 +42,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _Keyboard = __webpack_require__(1);
 
@@ -59,95 +59,113 @@
 	__webpack_require__(7);
 
 	(function () {
-	    var keyboard = new _Keyboard2.default();
-	    var synth = new _Synth2.default();
+	  var keyboard = new _Keyboard2.default();
+	  var synth = new _Synth2.default();
 
-	    var start = function start(mouse, event) {
-	        if (mouse) {
-	            if (event.target.dataset.note === event.target.dataset.note && event.target.dataset.octave === event.target.dataset.octave) {
-	                event.target.classList.add('keyboard__key--active');
+	  var start = function start(mouse, event) {
+	    if (mouse) {
+	      if (event.target.dataset.note === event.target.dataset.note && event.target.dataset.octave === event.target.dataset.octave) {
+	        event.target.classList.add("keyboard__key--active");
 
-	                synth.play(event.target.dataset.note, event.target.dataset.octave);
-	            }
-	        } else {
-	            keyboard.keyDown(event.keyCode, function (key) {
-	                document.querySelector('[data-note="' + key.note + '"][data-octave="' + key.octave + '"]').classList.add('keyboard__key--active');
+	        synth.play(event.target.dataset.note, event.target.dataset.octave);
+	      }
+	    } else {
+	      keyboard.keyDown(event.keyCode, function (key) {
+	        document.querySelector("[data-note=\"" + key.note + "\"][data-octave=\"" + key.octave + "\"]").classList.add("keyboard__key--active");
 
-	                synth.play(key.note, key.octave);
-	            });
-	        }
-	    };
+	        synth.play(key.note, key.octave);
+	      });
+	    }
+	  };
 
-	    var stop = function stop(mouse, event) {
-	        if (mouse) {
-	            event.target.classList.remove('keyboard__key--active');
-	        } else {
-	            keyboard.keyUp(event.keyCode, function () {
-	                document.querySelector('.keyboard__key--active').classList.remove('keyboard__key--active');
-	            });
-	        }
+	  var stop = function stop(mouse, event) {
+	    if (mouse) {
+	      event.target.classList.remove("keyboard__key--active");
+	    } else {
+	      keyboard.keyUp(event.keyCode, function () {
+	        document.querySelector(".keyboard__key--active").classList.remove("keyboard__key--active");
+	      });
+	    }
 
-	        synth.stop();
-	    };
+	    synth.stop();
+	  };
 
-	    [].forEach.call(document.querySelectorAll('.keyboard__key'), function (key) {
-	        keyboard.registerKey(key.dataset.note, key.dataset.octave, key.dataset.keyboardCode);
+	  [].forEach.call(document.querySelectorAll(".keyboard__key"), function (key) {
+	    keyboard.registerKey(key.dataset.note, key.dataset.octave, key.dataset.keyboardCode);
 
-	        key.addEventListener('mousedown', start.bind(undefined, true));
-	        key.addEventListener('mouseup', stop.bind(undefined, true));
-	    });
+	    key.addEventListener("mousedown", start.bind(undefined, true));
+	    key.addEventListener("mouseup", stop.bind(undefined, true));
+	  });
 
-	    window.addEventListener('keydown', start.bind(undefined, false));
-	    window.addEventListener('keyup', stop.bind(undefined, false));
+	  window.addEventListener("keydown", start.bind(undefined, false));
+	  window.addEventListener("keyup", stop.bind(undefined, false));
 
-	    document.querySelector('[data-controll="vco1.detune"]').addEventListener('input', function (event) {
-	        synth.vco1.detune = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco1.detune"]').addEventListener("input", function (event) {
+	    synth.vco1.detune = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="vco1.octaveUp"]').addEventListener('input', function (event) {
-	        synth.vco1.octaveUp = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco1.octaveUp"]').addEventListener("input", function (event) {
+	    synth.vco1.octaveUp = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="vco1.amp"]').addEventListener('input', function (event) {
-	        synth.vco1.amp = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco1.amp"]').addEventListener("input", function (event) {
+	    synth.vco1.amp = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="vco2.detune"]').addEventListener('input', function (event) {
-	        synth.vco2.detune = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco1.wave"]').addEventListener("input", function (event) {
+	    synth.vco1.shape = event.target.value;
+	    event.target.blur();
+	  });
 
-	    document.querySelector('[data-controll="vco2.octaveUp"]').addEventListener('input', function (event) {
-	        synth.vco2.octaveUp = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco2.detune"]').addEventListener("input", function (event) {
+	    synth.vco2.detune = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="vco2.amp"]').addEventListener('input', function (event) {
-	        synth.vco2.amp = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco2.octaveUp"]').addEventListener("input", function (event) {
+	    synth.vco2.octaveUp = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="lfo.rate"]').addEventListener('input', function (event) {
-	        synth.lfo.rate = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco2.amp"]').addEventListener("input", function (event) {
+	    synth.vco2.amp = event.target.value;
+	  });
 
-	    document.querySelector('[data-controll="lfo.amp"]').addEventListener('input', function (event) {
-	        synth.lfo.amp = event.target.value;
-	    });
+	  document.querySelector('[data-controll="vco2.wave"]').addEventListener("input", function (event) {
+	    synth.vco2.shape = event.target.value;
+	    event.target.blur();
+	  });
 
-	    document.querySelector('[data-controll="vca.gain"]').addEventListener('input', function (event) {
-	        synth.gain.gain.value = parseFloat(event.target.value);
-	    });
+	  document.querySelector('[data-controll="lfo.rate"]').addEventListener("input", function (event) {
+	    synth.lfo.rate = event.target.value;
+	  });
+
+	  document.querySelector('[data-controll="lfo.amp"]').addEventListener("input", function (event) {
+	    synth.lfo.amp = event.target.value;
+	  });
+	  document.querySelector('[data-controll="lfo.wave"]').addEventListener("input", function (event) {
+	    synth.lfo.shape = event.target.value;
+	    event.target.blur();
+	  });
+
+	  document.querySelector('[data-controll="vca.gain"]').addEventListener("input", function (event) {
+	    synth.gain.gain.value = parseFloat(event.target.value);
+	  });
+
+	  document.querySelector('[data-controll="filter.frequency"]').addEventListener("input", function (event) {
+	    synth.filter.frequency.value = parseFloat(event.target.value);
+	  });
 	})();
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _Key = __webpack_require__(2);
 
@@ -191,17 +209,17 @@
 	exports.default = _class;
 	;
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -226,17 +244,17 @@
 	exports.default = Key;
 	;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _VCO = __webpack_require__(4);
 
@@ -251,55 +269,56 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Synth = function () {
-	    function Synth() {
-	        _classCallCheck(this, Synth);
+	  function Synth() {
+	    _classCallCheck(this, Synth);
 
-	        this.audioContext = new AudioContext();
+	    this.audioContext = new AudioContext();
 
-	        this.vco1 = new _VCO2.default(this.audioContext);
-	        this.vco2 = new _VCO2.default(this.audioContext);
-	        this.lfo = new _LFO2.default(this.audioContext);
-	        this.gain = this.audioContext.createGain();
-	        this.gain.gain.value = 1;
+	    this.vco1 = new _VCO2.default(this.audioContext);
+	    this.vco2 = new _VCO2.default(this.audioContext);
+	    this.lfo = new _LFO2.default(this.audioContext);
+	    this.filter = this.audioContext.createBiquadFilter();
+	    this.gain = this.audioContext.createGain();
+	    this.gain.gain.value = 1;
 
-	        this.lfo.connect(this.vco1.oscillator.frequency);
-	        this.lfo.connect(this.vco2.oscillator.frequency);
-	        this.vco1.connect(this.gain);
-	        this.vco2.connect(this.gain);
-	        this.gain.connect(this.audioContext.destination);
+	    this.lfo.connect(this.vco1.oscillator.frequency);
+	    this.lfo.connect(this.vco2.oscillator.frequency);
+	    this.vco1.connect(this.gain);
+	    this.vco2.connect(this.gain);
+	    this.gain.connect(this.filter);
+	    this.filter.connect(this.audioContext.destination);
+	  }
+
+	  _createClass(Synth, [{
+	    key: "play",
+	    value: function play(note, octave) {
+	      this.vco1.play(note, octave);
+	      this.vco2.play(note, octave);
 	    }
+	  }, {
+	    key: "stop",
+	    value: function stop() {
+	      this.vco1.stop();
+	      this.vco2.stop();
+	    }
+	  }]);
 
-	    _createClass(Synth, [{
-	        key: 'play',
-	        value: function play(note, octave) {
-	            this.vco1.play(note, octave);
-	            this.vco2.play(note, octave);
-	        }
-	    }, {
-	        key: 'stop',
-	        value: function stop() {
-	            this.vco1.stop();
-	            this.vco2.stop();
-	        }
-	    }]);
-
-	    return Synth;
+	  return Synth;
 	}();
 
 	exports.default = Synth;
-	;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _FrequencyCalculator = __webpack_require__(5);
 
@@ -310,137 +329,148 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var VCO = function () {
-	    function VCO(audioContext) {
-	        var type = arguments.length <= 1 || arguments[1] === undefined ? 'sawtooth' : arguments[1];
+	  function VCO(audioContext) {
+	    var shape = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "sawtooth";
 
-	        _classCallCheck(this, VCO);
+	    _classCallCheck(this, VCO);
 
-	        this._detune = 0;
-	        this._frequency = 0;
-	        this._amp = 1;
-	        this._note = 'C';
-	        this._octave = 0;
-	        this._octaveUp = 2;
+	    this._detune = 0;
+	    this._frequency = 0;
+	    this._amp = 1;
+	    this._note = "C";
+	    this._octave = 0;
+	    this._octaveUp = 2;
+	    this._shape = shape;
 
-	        this.oscillator = audioContext.createOscillator();
-	        this.oscillator.frequency.value = 1;
-	        this.oscillator.type = type;
-	        this.oscillator.start(0);
+	    this.oscillator = audioContext.createOscillator();
+	    this.oscillator.frequency.value = 1;
+	    this.oscillator.type = this._shape;
+	    this.oscillator.start(0);
 
-	        this.gain = audioContext.createGain();
-	        this.gain.gain.value = this._amp;
+	    this.gain = audioContext.createGain();
+	    this.gain.gain.value = this._amp;
 
-	        this.input = this.oscillator;
-	        this.output = this.gain;
+	    this.input = this.oscillator;
+	    this.output = this.gain;
 
-	        this.oscillator.connect(this.gain);
+	    this.oscillator.connect(this.gain);
+	  }
+
+	  _createClass(VCO, [{
+	    key: "calculateFrequency",
+	    value: function calculateFrequency() {
+	      var _steps = _FrequencyCalculator2.default.calculateSteps(this._note, this._octave);
+	      _steps += this._detune;
+	      _steps += this._octaveUp * 12;
+
+	      return _FrequencyCalculator2.default.calculateFrequencyByStep(_steps);
 	    }
+	  }, {
+	    key: "connect",
+	    value: function connect(input) {
+	      return this.output.connect(input);
+	    }
+	  }, {
+	    key: "play",
+	    value: function play() {
+	      var note = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "C";
+	      var octave = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-	    _createClass(VCO, [{
-	        key: 'calculateFrequency',
-	        value: function calculateFrequency() {
-	            var _steps = _FrequencyCalculator2.default.calculateSteps(this._note, this._octave);
-	            _steps += this._detune;
-	            _steps += this._octaveUp * 12;
+	      this._note = note;
+	      this._octave = parseInt(octave);
+	      this._frequency = this.calculateFrequency();
+	      this.oscillator.frequency.value = this.frequency;
 
-	            return _FrequencyCalculator2.default.calculateFrequencyByStep(_steps);
-	        }
-	    }, {
-	        key: 'connect',
-	        value: function connect(input) {
-	            return this.output.connect(input);
-	        }
-	    }, {
-	        key: 'play',
-	        value: function play() {
-	            var note = arguments.length <= 0 || arguments[0] === undefined ? 'C' : arguments[0];
-	            var octave = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+	      this.gain.gain.value = this._amp;
+	    }
+	  }, {
+	    key: "stop",
+	    value: function stop() {
+	      this.gain.gain.value = 0;
+	    }
+	  }, {
+	    key: "destroy",
+	    value: function destroy() {
+	      this.oscillator.stop();
+	      this.oscillator.disconnect();
 
-	            this._note = note;
-	            this._octave = parseInt(octave);
-	            this._frequency = this.calculateFrequency();
-	            this.oscillator.frequency.value = this.frequency;
+	      this.gain.disconnect();
+	    }
+	  }, {
+	    key: "frequency",
+	    get: function get() {
+	      return this._frequency;
+	    },
+	    set: function set(frequency) {
+	      this._frequency = parseFloat(frequency);
+	      this.oscillator.frequency.value = this._frequency;
 
-	            this.gain.gain.value = this._amp;
-	        }
-	    }, {
-	        key: 'stop',
-	        value: function stop() {
-	            this.gain.gain.value = 0;
-	        }
-	    }, {
-	        key: 'destroy',
-	        value: function destroy() {
-	            this.oscillator.stop();
-	            this.oscillator.disconnect();
+	      return this._frequency;
+	    }
+	  }, {
+	    key: "detune",
+	    get: function get() {
+	      return this._detune;
+	    },
+	    set: function set(detune) {
+	      this._detune = parseInt(detune);
+	      this._frequency = this.calculateFrequency();
+	      this.oscillator.frequency.value = this._frequency;
 
-	            this.gain.disconnect();
-	        }
-	    }, {
-	        key: 'frequency',
-	        get: function get() {
-	            return this._frequency;
-	        },
-	        set: function set(frequency) {
-	            this._frequency = parseFloat(frequency);
-	            this.oscillator.frequency.value = this._frequency;
+	      return this._detune;
+	    }
+	  }, {
+	    key: "amp",
+	    get: function get() {
+	      return this._amp;
+	    },
+	    set: function set(amplitude) {
+	      this._amp = parseFloat(amplitude);
+	      this.gain.gain.value = this._amp;
 
-	            return this._frequency;
-	        }
-	    }, {
-	        key: 'detune',
-	        get: function get() {
-	            return this._detune;
-	        },
-	        set: function set(detune) {
-	            this._detune = parseInt(detune);
-	            this._frequency = this.calculateFrequency();
-	            this.oscillator.frequency.value = this._frequency;
+	      return this._amp;
+	    }
+	  }, {
+	    key: "octaveUp",
+	    get: function get() {
+	      return this._octaveUp;
+	    },
+	    set: function set(octave) {
+	      this._octaveUp = parseInt(octave);
+	      this.frequency = this.calculateFrequency();
+	      this.oscillator.frequency.value = this._frequency;
 
-	            return this._detune;
-	        }
-	    }, {
-	        key: 'amp',
-	        get: function get() {
-	            return this._amp;
-	        },
-	        set: function set(amplitude) {
-	            this._amp = parseFloat(amplitude);
-	            this.gain.gain.value = this._amp;
+	      return this._octaveUp;
+	    }
+	  }, {
+	    key: "shape",
+	    get: function get() {
+	      return this._shape;
+	    },
+	    set: function set(type) {
+	      this._shape = type;
+	      this.oscillator.type = this._shape;
 
-	            return this._amp;
-	        }
-	    }, {
-	        key: 'octaveUp',
-	        get: function get() {
-	            return this._octaveUp;
-	        },
-	        set: function set(octave) {
-	            this._octaveUp = parseInt(octave);
-	            this.frequency = this.calculateFrequency();
-	            this.oscillator.frequency.value = this._frequency;
+	      return this._shape;
+	    }
+	  }]);
 
-	            return this._octaveUp;
-	        }
-	    }]);
-
-	    return VCO;
+	  return VCO;
 	}();
 
 	exports.default = VCO;
-	;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -520,17 +550,17 @@
 
 	exports.default = FrequencyCalculator;
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _VCO2 = __webpack_require__(4);
 
@@ -548,11 +578,11 @@
 	    _inherits(LFO, _VCO);
 
 	    function LFO(audioContext) {
-	        var type = arguments.length <= 1 || arguments[1] === undefined ? 'sine' : arguments[1];
+	        var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'sine';
 
 	        _classCallCheck(this, LFO);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LFO).call(this, audioContext, type));
+	        var _this = _possibleConstructorReturn(this, (LFO.__proto__ || Object.getPrototypeOf(LFO)).call(this, audioContext, type));
 
 	        _this.oscillator.type = type;
 	        return _this;
@@ -576,9 +606,9 @@
 
 	exports.default = LFO;
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -592,8 +622,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./style.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!./style.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -602,9 +632,9 @@
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(9)();
 	// imports
@@ -616,9 +646,9 @@
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -672,9 +702,9 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -689,7 +719,7 @@
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -889,7 +919,6 @@
 	function applyToTag(styleElement, obj) {
 		var css = obj.css;
 		var media = obj.media;
-		var sourceMap = obj.sourceMap;
 
 		if(media) {
 			styleElement.setAttribute("media", media)
@@ -907,7 +936,6 @@
 
 	function updateLink(linkElement, obj) {
 		var css = obj.css;
-		var media = obj.media;
 		var sourceMap = obj.sourceMap;
 
 		if(sourceMap) {
@@ -926,5 +954,5 @@
 	}
 
 
-/***/ }
+/***/ })
 /******/ ]);

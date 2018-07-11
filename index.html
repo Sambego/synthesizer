@@ -25,6 +25,15 @@
                         Amp
                         <input type="range" min="0" max="1" value="1" step="0.01" data-controll="vco1.amp">
                     </label>
+                    <label>
+                        wave
+                        <select data-controll="vco1.wave">
+                          <option value="sine">Sine</option>
+                          <option value="square">Square</option>
+                          <option value="triangle">Triangle</option>
+                          <option value="sawtooth" selected>Sawtooth</option>
+                        </select>
+                    </label>
                 </fieldset>
 
                 <fieldset>
@@ -44,6 +53,15 @@
                         Amp
                         <input type="range" min="0" max="1" value="1" step="0.01" data-controll="vco2.amp">
                     </label>
+                    <label>
+                        wave
+                        <select data-controll="vco2.wave">
+                          <option value="sine">Sine</option>
+                          <option value="square">Square</option>
+                          <option value="triangle">Triangle</option>
+                          <option value="sawtooth" selected>Sawtooth</option>
+                        </select>
+                    </label>
                 </fieldset>
 
                 <fieldset>
@@ -58,6 +76,16 @@
                         Amp
                         <input type="range" min="0" max="100" value="0" step="1" data-controll="lfo.amp">
                     </label>
+
+                    <label>
+                        wave
+                        <select data-controll="lfo.wave">
+                          <option value="sine" selected>Sine</option>
+                          <option value="square">Square</option>
+                          <option value="triangle">Triangle</option>
+                          <option value="sawtooth">Sawtooth</option>
+                        </select>
+                    </label>
                 </fieldset>
                 <fieldset>
                     <legend>VCA</legend>
@@ -65,6 +93,14 @@
                     <label>
                         Volume
                         <input type="range" min="0" max="1" value="1" step="0.01" data-controll="vca.gain">
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Filter</legend>
+
+                    <label>
+                        Frequency
+                        <input type="range" min="0" max="20000" value="0" step="100" data-controll="filter.frequency">
                     </label>
                 </fieldset>
             </div>
